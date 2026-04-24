@@ -23,6 +23,132 @@
             overflow-x: hidden;
         }
 
+        /* ========== NAVBAR RESPONSIF (TAMBAHAN BARU, TIDAK MENGUBAH APAPUN YANG SUDAH ADA) ========== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 245, 235, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #ffdec9;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #cc7b4b, #a5512c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            color: #e68a4d;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: #e68a4d;
+        }
+
+        /* Desktop menu */
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-weight: 500;
+            color: #7b4a2e;
+            transition: 0.2s;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #cc7b4b;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #e68a4d;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Tombol hamburger (hanya tampil di mobile) */
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #a5512c;
+            transition: 0.2s;
+            background: none;
+            border: none;
+        }
+
+        .hamburger:hover {
+            color: #cc7b4b;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 780px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(255, 245, 235, 0.98);
+                backdrop-filter: blur(12px);
+                width: 70%;
+                height: 100vh;
+                text-align: center;
+                transition: 0.3s ease;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                padding: 2rem 0;
+                gap: 1.8rem;
+                z-index: 999;
+                border-radius: 0 20px 20px 0;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .nav-link {
+                font-size: 1.1rem;
+                padding: 0.5rem;
+                display: block;
+            }
+            .nav-container {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
         /* ANIMASI HALAMAN SAJA (slide, fade, pop) */
         @keyframes slideInLeft {
             from {
@@ -411,6 +537,25 @@
 </head>
 <body>
 
+<!-- ========== NAVBAR BARU (TIDAK MENGUBAH KONTEN LAIN) ========== -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <i class="fas fa-grin-tongue-squint"></i> Imelda.
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#tentang" class="nav-link">🌸 Tentang</a></li>
+            <li><a href="#skill" class="nav-link">💡 Skill</a></li>
+            <li><a href="#project" class="nav-link">📁 Project</a></li>
+            <li><a href="#pendidikan" class="nav-link">🎓 Pendidikan</a></li>
+            <li><a href="#kontak" class="nav-link">📫 Kontak</a></li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
     <!-- Hero section dengan animasi halaman pop -->
     <div class="hero animate-pop">
@@ -449,7 +594,7 @@
     </div>
 
     <!-- Tentang Imelda -->
-    <div class="card animate-left" style="animation-delay: 0.1s;">
+    <div id="tentang" class="card animate-left" style="animation-delay: 0.1s;">
         <div class="section-title">
             <i class="fas fa-face-smile"></i>
             <span>🍥 Tentang Imelda</span>
@@ -461,7 +606,7 @@
     </div>
 
     <!-- Skill yang sedang diasah -->
-    <div class="card animate-right" style="animation-delay: 0.2s;">
+    <div id="skill" class="card animate-right" style="animation-delay: 0.2s;">
         <div class="section-title">
             <i class="fas fa-puzzle-piece"></i>
             <span>🤹‍♀️ Skill yang sedang diasah</span>
@@ -483,7 +628,7 @@
     </div>
 
     <!-- Project Mini -->
-    <div>
+    <div id="project">
         <div class="section-title" style="margin-bottom: 1rem;">
             <i class="fas fa-laptop-file"></i>
             <span>📁 Mini Project</span>
@@ -513,7 +658,7 @@
             </div>
 
     <!-- Pendidikan & riwayat -->
-    <div class="card animate-pop" style="margin-top: 1rem; background: #fffaf1;">
+    <div id="pendidikan" class="card animate-pop" style="margin-top: 1rem; background: #fffaf1;">
         <div class="section-title">
             <i class="fas fa-school"></i>
             <span>🎓 Pendidikan & cerita manis</span>
@@ -526,7 +671,7 @@
     </div>
 
     <!-- Kontak -->
-    <div class="card" style="text-align: center; background: #fff8ef;">
+    <div id="kontak" class="card" style="text-align: center; background: #fff8ef;">
         <div class="section-title justify-content-center" style="justify-content: center; border-left: none;">
             <i class="fas fa-envelope-open-text"></i>
             <span>📫 Kirim pesan ke Imelda yukk!!</span>
@@ -545,6 +690,36 @@
 </div>
 
 <script>
+    // ========== NAVBAR RESPONSIF: Toggle hamburger menu ==========
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Ubah icon hamburger menjadi X saat aktif
+            const icon = hamburgerBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Tutup menu mobile ketika klik link navbar
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    }
+
     // Scroll reveal animation: hanya mengatur opacity dan transform saat elemen muncul
     const revealElements = document.querySelectorAll('.card, .project-card');
     const observer = new IntersectionObserver((entries) => {
@@ -565,8 +740,24 @@
         observer.observe(el);
     });
 
-    // Contoh: document.querySelector('.avatar-bubble').innerHTML = '<img src="fotoku.jpg" alt="Imelda">';
-    console.log("Portofolio Imelda siap — emoji-emoji lucu berputar mengelilingi foto!");
+    // Smooth scroll untuk anchor link (opsional, biar lebih halus)
+    document.querySelectorAll('.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+
+    console.log("Portofolio Imelda siap — emoji-emoji lucu berputar mengelilingi foto! Navbar responsif telah ditambahkan.");
 </script>
 
 </body>
