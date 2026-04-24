@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Imelda · Portofolio Lucu & Berputar Emoji</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(145deg, #fef7e8 0%, #ffe8dc 100%);
+            color: #3b2a1f;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ANIMASI HALAMAN SAJA (slide, fade, pop) */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* ANIMASI EMOJI BERPUTAR MENGELILINGI FOTO */
+        @keyframes orbitEmoji {
+            from {
+                transform: rotate(0deg) translateX(110px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translateX(110px) rotate(-360deg);
+            }
+        }
+
+        @keyframes orbitEmojiSmall {
+            from {
+                transform: rotate(0deg) translateX(90px) rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg) translateX(90px) rotate(-360deg);
+            }
+        }
+
+        /* Kelas animasi untuk kemunculan elemen */
+        .animate-left {
+            animation: slideInLeft 0.6s ease forwards;
+        }
+        .animate-right {
+            animation: slideInRight 0.6s ease forwards;
+        }
+        .animate-pop {
+            animation: pop 0.5s ease forwards;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        /* Header / Hero Section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            background: rgba(255, 245, 235, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text .greeting {
+            font-size: 1.1rem;
+            background: #f7c5a3;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #cc7b4b, #a5512c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin: 0.5rem 0;
+        }
+
+        .hero-text .nim-info {
+            font-size: 1rem;
+            background: #fff0e0;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            margin-top: 0.5rem;
+        }
+
+        .hero-avatar {
+            flex: 0.5;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Container foto dengan emoji berputar */
+        .avatar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tempat foto (foto nantinya bisa diganti) */
+        .avatar-bubble {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            background: #ffd6b0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            z-index: 2;
+            transition: transform 0.2s;
+            border: 3px solid #fff6eb;
+            overflow: hidden;
+        }
+
+        .avatar-bubble i {
+            font-size: 5rem;
+            color: #ad5a2e;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+        }
+
+        /* Untuk foto asli nanti (jika ada gambar) */
+        .avatar-bubble img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .avatar-bubble:hover {
+            transform: scale(1.02);
+        }
+
+        /* Gaya untuk emoji berputar */
+        .orbit-emoji {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,240,0.7);
+            border-radius: 50%;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            pointer-events: none; /* agar tidak menghalangi klik */
+            z-index: 3;
+        }
+
+        /* Animasi orbit dengan delay berbeda */
+        .emoji-orbit-1 {
+            animation: orbitEmoji 8s linear infinite;
+        }
+        .emoji-orbit-2 {
+            animation: orbitEmojiSmall 10s linear infinite reverse;
+        }
+        .emoji-orbit-3 {
+            animation: orbitEmoji 12s linear infinite;
+        }
+        .emoji-orbit-4 {
+            animation: orbitEmojiSmall 7s linear infinite reverse;
+        }
+        .emoji-orbit-5 {
+            animation: orbitEmoji 9s linear infinite;
+        }
+        .emoji-orbit-6 {
+            animation: orbitEmojiSmall 11s linear infinite reverse;
+        }
+
+        /* kartu umum */
+        .card {
+            background: #ffffffdd;
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.6rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #ffecdb;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 7px solid #f2a07e;
+            padding-left: 1rem;
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: #e68a4d;
+        }
+
+        /* skills grid */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-badge {
+            background: #ffede0;
+            padding: 0.7rem 1.3rem;
+            border-radius: 60px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            border: 1px solid #ffc2a1;
+        }
+
+        .skill-badge i {
+            font-size: 1.3rem;
+            color: #cd6e3e;
+        }
+
+        .skill-badge:hover {
+            background: #ffd8be;
+            transform: scale(1.02);
+        }
+
+        /* project cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-card {
+            background: #fffaf5;
+            border-radius: 1.5rem;
+            padding: 1.4rem;
+            transition: all 0.25s;
+            border: 1px solid #ffe1cc;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+        }
+
+        .project-card:hover {
+            background: #fff8f0;
+            transform: translateY(-6px);
+        }
+
+        .project-icon {
+            font-size: 2.4rem;
+            background: #fae3d1;
+            width: 55px;
+            height: 55px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: #5e4332;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            border-top: 2px dashed #f3c7ac;
+        }
+
+        @media (max-width: 780px) {
+            .container {
+                padding: 1rem;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .avatar-container {
+                width: 160px;
+                height: 160px;
+            }
+            .avatar-bubble {
+                width: 120px;
+                height: 120px;
+            }
+            .avatar-bubble i {
+                font-size: 3.5rem;
+            }
+            .orbit-emoji {
+                width: 30px;
+                height: 30px;
+                font-size: 24px;
+            }
+            @keyframes orbitEmoji {
+                from { transform: rotate(0deg) translateX(85px) rotate(0deg); }
+                to { transform: rotate(360deg) translateX(85px) rotate(-360deg); }
+            }
+            @keyframes orbitEmojiSmall {
+                from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+                to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+            }
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* microsoft office special */
+        .ms-badge {
+            background: #e5f3ff;
+            border-left: 4px solid #2b5797;
+        }
+
+        .education-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            background: #fff5ed;
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+        }
+
+        /* catatan jika foto ingin diganti */
+        .photo-note {
+            font-size: 0.7rem;
+            margin-top: 8px;
+            color: #a57358;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero section dengan animasi halaman pop -->
+    <div class="hero animate-pop">
+        <div class="hero-text">
+            <span class="greeting"><i class="fas fa-smile-wink"></i> Hello Social World!</span>
+            <h1>Imelda <span style="font-family: 'Pacifico', cursive; font-weight: normal;">✨</span></h1>
+            <p><i class="fas fa-graduation-cap"></i> Sistem Informasi · La Tansa Mashiro</p>
+            <p class="nim-info"><i class="fas fa-id-card"></i> NIM: 515241009 · Angkatan 2024</p>
+            <div style="margin-top: 1rem;">
+                <span class="skill-badge" style="background:#ffe1cf;"><i class="fas fa-laptop-code"></i> Pemula antusias!</span>
+                <span class="skill-badge" style="background:#ffe1cf;"><i class="fas fa-heart"></i> Belajar sambil senyum</span>
+            </div>
+        </div>
+        <div class="hero-avatar">
+            <!-- Container foto dengan emoji berputar di sekelilingnya -->
+            <div class="avatar-container">
+                <!-- Emoji-emoji lucu yang berputar mengelilingi foto -->
+                <div class="orbit-emoji emoji-orbit-1" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">😊</div>
+                <div class="orbit-emoji emoji-orbit-2" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">🐣</div>
+                <div class="orbit-emoji emoji-orbit-3" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">✨</div>
+                <div class="orbit-emoji emoji-orbit-4" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">🌸</div>
+                <div class="orbit-emoji emoji-orbit-5" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">⭐</div>
+                <div class="orbit-emoji emoji-orbit-6" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">💖</div>
+                
+                <!-- Foto profil (bisa diganti nanti dengan gambar asli) -->
+                <div class="avatar-bubble" id="profilePhoto">
+                    
+                    <i class="fas fa-grin-tongue-squint"></i>
+
+                    <!-- <img src="foto-imelda.jpg" alt="imelda"> -->
+                </div>
+            </div>
+            <p class="photo-note"><i class="fas fa-camera"></i> IMELDA!</p>
+            <p style="margin-top: 5px; font-size:1rem;"><i class="fas fa-cat"></i> Semangat & produktif</p>
+        </div>
+    </div>
+
+    <!-- Tentang Imelda -->
+    <div class="card animate-left" style="animation-delay: 0.1s;">
+        <div class="section-title">
+            <i class="fas fa-face-smile"></i>
+            <span>🍥 Tentang Imelda</span>
+        </div>
+        <p>Halo! Aku mahasiswi Sistem Informasi di <strong>La Tansa Mashiro</strong>, angkatan 2024. Masih dalam proses belajar, tapi aku sangat suka memadukan logika, data, dan desain fun. Senang membuat sesuatu yang berguna sekaligus bikin orang tersenyum. <i class="fas fa-cookie-bite"></i> Saat ini fokus mendalami dasar-dasar pemrograman, analisis sistem, dan tentu saja menguasai Microsoft Office untuk kelancaran akademik.</p>
+        <div style="margin-top: 12px;">
+            <i class="fas fa-map-marker-alt"></i> Rangkasbitung, Banten ·  <i class="fas fa-calendar-alt"></i> 2024 - now
+        </div>
+    </div>
+
+    <!-- Skill yang sedang diasah -->
+    <div class="card animate-right" style="animation-delay: 0.2s;">
+        <div class="section-title">
+            <i class="fas fa-puzzle-piece"></i>
+            <span>🤹‍♀️ Skill yang sedang diasah</span>
+        </div>
+        <p class="skill-note" style="margin-bottom: 0.8rem;"><i class="fas fa-seedling"></i> Masih tahap belajar (Junior explorer), tapi siap belajar cepat!</p>
+        <div class="skills-grid">
+            <div class="skill-badge"><i class="fas fa-chart-line"></i> Analisis Kebutuhan Sistem (dasar)</div>
+            <div class="skill-badge"><i class="fas fa-database"></i> SQL / Basis Data (pemula)</div>
+
+            <div class="skill-badge"><i class="fas fa-code"></i> HTML & CSS (responsif)</div>
+            <div class="skill-badge ms-badge"><i class="fab fa-microsoft"></i> Microsoft Word 🖊️</div>
+            <div class="skill-badge ms-badge"><i class="fas fa-table"></i> Microsoft Excel (rumus dasar, pivot sederhana)</div>
+            <div class="skill-badge ms-badge"><i class="fas fa-chalkboard-user"></i> Microsoft PowerPoint (presentasi menarik)</div>
+            <div class="skill-badge"><i class="fas fa-folder-open"></i> Dokumentasi & Rapi</div>
+        </div>
+        <div style="margin-top: 1rem; background: #ffefe3; border-radius: 50px; padding: 0.5rem 1rem;">
+            <i class="fas fa-lightbulb"></i> <strong>Catatan lucu:</strong> Excel masih suka tertukar antara masing masing rumus! 😂
+        </div>
+    </div>
+
+    <!-- Project Mini -->
+    <div>
+        <div class="section-title" style="margin-bottom: 1rem;">
+            <i class="fas fa-laptop-file"></i>
+            <span>📁 Mini Project</span>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card animate-left" style="animation-delay: 0.1s;">
+                <div class="project-icon"><i class="fas fa-clipboard-list"></i></div>
+                <div class="project-title">📊 Sistem Kasir Sederhana (Excel)</div>
+                <div class="project-desc">Membuat form transaksi sederhana menggunakan Microsoft Excel dengan fungsi SUM, IF, dan format bersyarat. Bisa menghitung total belanja & kembalian. Cocok untuk mini market UMKM. <i class="fas fa-smile"></i> <strong>Tools:</strong> Excel, rumus dasar.</div>
+            </div>
+            <div class="project-card animate-right" style="animation-delay: 0.2s;">
+                <div class="project-icon"><i class="fas fa-id-card"></i></div>
+                <div class="project-title">📇 Portofolio Digital (HTML/CSS)</div>
+                <div class="project-desc">Page Portofolio yang aku buat di github dan hanya menggunakan html dan css saja lohh! <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></div>
+            </div>
+            <div class="project-card animate-left" style="animation-delay: 0.3s;">
+                <div class="project-icon"><i class="fas fa-chart-pie"></i></div>
+                <div class="project-title">🍔 Survei Makanan Favorit (PowerPoint + Excel)</div>
+                <div class="project-desc">Mengolah data survei 20 teman tentang jajanan favorit, lalu membuat diagram pie & batang interaktif di PowerPoint. Hasilnya disajikan dalam presentasi yang menarik & mudah dipahami. <i class="fas fa-chart-simple"></i> Kombinasi MS Office keren!</div>
+            </div>
+            <div class="project-card animate-right" style="animation-delay: 0.4s;">
+                <div class="project-icon"><i class="fas fa-tasks"></i></div>
+                <div class="project-title">✅ To-Do List</div>
+                <div class="project-desc">Aplikasi daftar tugas sederhana dengan HTML/CSS/JS (localStorage). Bisa tambah, centang selesai, dan hapus. cocok buat aku yang lagi belajar. <i class="fas fa-cat"></i></div>
+            </div>
+        </div>
+            </div>
+
+    <!-- Pendidikan & riwayat -->
+    <div class="card animate-pop" style="margin-top: 1rem; background: #fffaf1;">
+        <div class="section-title">
+            <i class="fas fa-school"></i>
+            <span>🎓 Pendidikan & cerita manis</span>
+        </div>
+        <div class="education-detail">
+            <div><i class="fas fa-university"></i> <strong>La Tansa Mashiro</strong> — S1 Sistem Informasi (2024-sekarang) <br> <small>Semester 4, lagi asyik-asyiknya belajar Pemrograman & basis data.</small></div>
+            <div><i class="fas fa-laptop"></i> <strong>Course Online:</strong> Pengenalan Pemrograman melalui kursus HUAWEI.</div>
+        </div>
+        
+    </div>
+
+    <!-- Kontak -->
+    <div class="card" style="text-align: center; background: #fff8ef;">
+        <div class="section-title justify-content-center" style="justify-content: center; border-left: none;">
+            <i class="fas fa-envelope-open-text"></i>
+            <span>📫 Kirim pesan ke Imelda yukk!!</span>
+        </div>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;">
+            <a href="#" style="color: #a5532a;"><i class="fab fa-instagram "></i> nono yaa</a>
+            <a href="#" style="color: #a5532a;"><i class="fab fa-linkedin"></i> imelda</a>
+            <a href="#" style="color: #a5532a;"><i class="fab fa-github"></i> imeldaaja</a>
+            <span><i class="fas fa-heart"></i> imelddoang@gmail.com</span>
+        </div>
+        </div>
+
+    <footer>
+        <p>🐣 Portofolio Imelda <i class="fas fa-feather-alt"></i> | 2026 • La Tansa Mashiro</p>
+          </footer>
+</div>
+
+<script>
+    // Scroll reveal animation: hanya mengatur opacity dan transform saat elemen muncul
+    const revealElements = document.querySelectorAll('.card, .project-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // efek fade-in saat scroll
+    revealElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // Contoh: document.querySelector('.avatar-bubble').innerHTML = '<img src="fotoku.jpg" alt="Imelda">';
+    console.log("Portofolio Imelda siap — emoji-emoji lucu berputar mengelilingi foto!");
+</script>
+
+</body>
+</html>
