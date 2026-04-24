@@ -24,6 +24,8 @@
             --purple-50: #EEEDFE;
             --coral-400: #D85A30;
             --coral-50: #FAECE7;
+            --pink-dark: #e91e8c;
+            --lavender: #d8b4fe;
             --bg: #f0f6ff;
             --card-bg: rgba(255,255,255,0.85);
             --text-main: #042C53;
@@ -184,221 +186,62 @@
             0%, 100% { box-shadow: 0 0 16px rgba(55,138,221,0.2), 0 0 0 0 rgba(55,138,221,0.0); }
             50% { box-shadow: 0 0 40px rgba(55,138,221,0.35), 0 0 0 6px rgba(55,138,221,0.07); }
         }
-        @keyframes cornerDash {
-            0% { stroke-dashoffset: 800; }
-            100% { stroke-dashoffset: 0; }
+
+        /* CORNER ACCENTS: sudut-sudut kotak animasi */
+        .corner {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            z-index: 4;
         }
-        @keyframes squareSpin {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(90deg); }
+
+        .corner-tl {
+            top: -2px;
+            left: -2px;
+            border-top: 3px solid var(--pink-dark);
+            border-left: 3px solid var(--pink-dark);
         }
-        /* Corner pieces move animation */
+
+        .corner-tr {
+            top: -2px;
+            right: -2px;
+            border-top: 3px solid var(--pink-dark);
+            border-right: 3px solid var(--pink-dark);
+        }
+
+        .corner-bl {
+            bottom: -2px;
+            left: -2px;
+            border-bottom: 3px solid var(--pink-dark);
+            border-left: 3px solid var(--pink-dark);
+        }
+
+        .corner-br {
+            bottom: -2px;
+            right: -2px;
+            border-bottom: 3px solid var(--pink-dark);
+            border-right: 3px solid var(--pink-dark);
+        }
+
+        /* Animasi pulsa warna pada semua corner */
         @keyframes cornerPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.85); }
-        }
-        @keyframes borderGlow {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        /* ── CONTAINER ── */
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 3rem;
-            position: relative;
-            z-index: 1;
+            0%, 100% {
+                border-color: var(--pink-dark);
+            }
+            50% {
+                border-color: var(--lavender);
+            }
         }
 
-        /* ── HERO ── */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 2.5rem;
-            align-items: center;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            padding: 2.5rem 3rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(55,138,221,0.2);
-            box-shadow: 0 20px 60px rgba(4,44,83,0.08), 0 1px 0 rgba(255,255,255,0.8) inset;
-            animation: pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
-            position: relative;
-            overflow: hidden;
+        .corner-tl, .corner-tr, .corner-bl, .corner-br {
+            animation: cornerPulse 2s ease-in-out infinite;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -60px; right: -60px;
-            width: 280px; height: 280px;
-            background: radial-gradient(circle, rgba(55,138,221,0.12), transparent 70%);
-            pointer-events: none;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -40px; left: -40px;
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, rgba(29,158,117,0.1), transparent 70%);
-            pointer-events: none;
-        }
+        /* Delay berbeda untuk variasi */
+        .corner-tr { animation-delay: 0.3s; }
+        .corner-bl { animation-delay: 0.6s; }
+        .corner-br { animation-delay: 0.9s; }
 
-        .greeting-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--blue-50);
-            border: 1px solid rgba(55,138,221,0.3);
-            color: var(--blue-600);
-            font-weight: 700;
-            font-size: 0.8rem;
-            padding: 0.3rem 0.9rem;
-            border-radius: 50px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: 3.4rem;
-            font-weight: 800;
-            line-height: 1.05;
-            color: var(--blue-900);
-            margin-bottom: 0.7rem;
-            letter-spacing: -1.5px;
-        }
-        .hero h1 .accent { color: var(--blue-500); }
-
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.2rem;
-        }
-        .meta-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--blue-50);
-            border: 1px solid rgba(55,138,221,0.25);
-            color: var(--blue-800);
-            font-weight: 600;
-            font-size: 0.8rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: 50px;
-        }
-        .meta-pill i { color: var(--blue-500); font-size: 0.75rem; }
-        .meta-pill.teal { background: var(--teal-50); border-color: rgba(29,158,117,0.25); color: #085041; }
-        .meta-pill.teal i { color: var(--teal-400); }
-
-        /* ── ANIMATED PHOTO CONTAINER ── */
-        .hero-avatar { text-align: center; position: relative; }
-
-        .avatar-wrapper {
-            position: relative;
-            width: 230px;
-            height: 230px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ── KOTAK LUAR: spinning conic gradient border ── */
-        .ring-outer {
-            position: absolute;
-            inset: 0;
-            border-radius: 28px;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .ring-outer::before {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background: conic-gradient(
-                from 0deg,
-                #378ADD 0deg, #1D9E75 90deg, #7F77DD 180deg, #378ADD 270deg, #1D9E75 360deg
-            );
-            animation: rotateBorder 3s linear infinite;
-        }
-        .ring-outer::after {
-            content: '';
-            position: absolute;
-            inset: 4px;
-            border-radius: 24px;
-            background: var(--bg);
-        }
-
-        /* ── KOTAK TENGAH: dashed border berputar balik ── */
-        .ring-mid {
-            position: absolute;
-            inset: -12px;
-            border-radius: 36px;
-            border: 2px dashed rgba(55,138,221,0.4);
-            animation: rotateBorderReverse 7s linear infinite;
-            z-index: 0;
-        }
-
-/* ── CORNER ACCENTS: sudut-sudut kotak animasi ── */
-/* ── CORNER ACCENTS: sudut-sudut kotak animasi ── */
-.corner {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    z-index: 4;
-}
-
-.corner-tl {
-    top: -2px;
-    left: -2px;
-    border-top: 3px solid var(--pink-dark);
-    border-left: 3px solid var(--pink-dark);
-}
-
-.corner-tr {
-    top: -2px;
-    right: -2px;
-    border-top: 3px solid var(--pink-dark);
-    border-right: 3px solid var(--pink-dark);
-}
-
-.corner-bl {
-    bottom: -2px;
-    left: -2px;
-    border-bottom: 3px solid var(--pink-dark);
-    border-left: 3px solid var(--pink-dark);
-}
-
-.corner-br {
-    bottom: -2px;
-    right: -2px;
-    border-bottom: 3px solid var(--pink-dark);
-    border-right: 3px solid var(--pink-dark);
-}
-
-/* Animasi pulsa warna pada semua corner */
-@keyframes cornerPulse {
-    0%, 100% {
-        border-color: var(--pink-dark);
-    }
-    50% {
-        border-color: var(--lavender);
-    }
-}
-
-.corner-tl, .corner-tr, .corner-bl, .corner-br {
-    animation: cornerPulse 2s ease-in-out infinite;
-}
-
-/* Delay berbeda untuk variasi */
-.corner-tr { animation-delay: 0.3s; }
-.corner-bl { animation-delay: 0.6s; }
-.corner-br { animation-delay: 0.9s; }
         /* ── FOTO: kotak rounded ── */
         .avatar-bubble {
             position: relative;
@@ -782,10 +625,10 @@
                 <div class="orbit-emoji oe5">⭐</div>
                 <div class="orbit-emoji oe6">💙</div>
 
-                <!-- Photo bubble -->
+                <!-- Photo bubble dengan foto imelda.jpg -->
                 <div class="avatar-bubble">
-                    <i class="fas fa-grin-tongue-squint"></i>
-                    <!-- Uncomment untuk foto asli: <img src="foto-imelda.jpg" alt="Imelda"> -->
+                    <img id="profilePhoto" src="" alt="Foto Imelda" style="display: none;">
+                    <i id="emojiFallback" class="fas fa-grin-tongue-squint"></i>
                 </div>
             </div>
             <p class="avatar-label">✦ IMELDA ✦</p>
@@ -913,6 +756,28 @@
 </div>
 
 <script>
+    // ========== SETUP FOTO DARI GITHUB ==========
+    // GANTI URL INI dengan raw URL foto imelda.jpg dari GitHub Anda
+    const PHOTO_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/imelda.jpg";
+    
+    const profileImg = document.getElementById('profilePhoto');
+    const emojiFallback = document.getElementById('emojiFallback');
+    
+    if (profileImg && emojiFallback) {
+        profileImg.src = PHOTO_URL;
+        profileImg.onload = function() {
+            // Foto berhasil dimuat
+            profileImg.style.display = 'block';
+            emojiFallback.style.display = 'none';
+        };
+        profileImg.onerror = function() {
+            // Foto gagal dimuat, tampilkan emoji
+            profileImg.style.display = 'none';
+            emojiFallback.style.display = 'flex';
+            console.log("Foto imelda.jpg tidak ditemukan, pastikan URL GitHub sudah benar");
+        };
+    }
+
     // Hamburger toggle
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
@@ -925,7 +790,9 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
-                hamburgerBtn.querySelector('i').className = 'fas fa-bars';
+                if (hamburgerBtn.querySelector('i')) {
+                    hamburgerBtn.querySelector('i').className = 'fas fa-bars';
+                }
             });
         });
     }
