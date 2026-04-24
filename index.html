@@ -3,762 +3,952 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Imelda · Portofolio Lucu & Berputar Emoji</title>
-    <!-- Font Awesome 6 -->
+    <title>Imelda · Portofolio Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --blue-50: #E6F1FB;
+            --blue-100: #B5D4F4;
+            --blue-200: #85B7EB;
+            --blue-300: #5599E0;
+            --blue-400: #378ADD;
+            --blue-500: #2575CC;
+            --blue-600: #185FA5;
+            --blue-700: #104880;
+            --blue-800: #0C447C;
+            --blue-900: #042C53;
+            --teal-400: #1D9E75;
+            --teal-50: #E1F5EE;
+            --purple-400: #7F77DD;
+            --purple-50: #EEEDFE;
+            --coral-400: #D85A30;
+            --coral-50: #FAECE7;
+            --bg: #f0f6ff;
+            --card-bg: rgba(255,255,255,0.85);
+            --text-main: #042C53;
+            --text-muted: #185FA5;
+            --border: rgba(55,138,221,0.15);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(145deg, #fef7e8 0%, #ffe8dc 100%);
-            color: #3b2a1f;
-            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse 80% 60% at 20% -10%, rgba(53,136,221,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(29,158,117,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse 40% 40% at 60% 40%, rgba(127,119,221,0.08) 0%, transparent 50%);
+            color: var(--text-main);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* ========== NAVBAR RESPONSIF (TAMBAHAN BARU, TIDAK MENGUBAH APAPUN YANG SUDAH ADA) ========== */
+        /* ── GRID DOTS BACKGROUND ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(55,138,221,0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── NAVBAR ── */
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(255, 245, 235, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-bottom: 1px solid #ffdec9;
+            background: rgba(240,246,255,0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(55,138,221,0.18);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 0.8rem 2rem;
+            padding: 0 2rem;
+            height: 62px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #cc7b4b, #a5512c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--blue-600);
             letter-spacing: -0.5px;
         }
+        .logo span { color: var(--teal-400); }
 
-        .logo i {
-            color: #e68a4d;
-            background: none;
-            -webkit-background-clip: unset;
-            background-clip: unset;
-            color: #e68a4d;
-        }
-
-        /* Desktop menu */
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 0.2rem;
             list-style: none;
-            transition: all 0.3s ease;
         }
 
         .nav-link {
             text-decoration: none;
-            font-weight: 500;
-            color: #7b4a2e;
-            transition: 0.2s;
-            font-size: 1rem;
-            padding: 0.5rem 0;
-            position: relative;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--blue-700);
+            padding: 0.45rem 0.9rem;
+            border-radius: 50px;
+            letter-spacing: 0.01em;
+            transition: all 0.2s;
         }
-
         .nav-link:hover {
-            color: #cc7b4b;
+            background: var(--blue-50);
+            color: var(--blue-600);
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: #e68a4d;
-            transition: 0.3s;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Tombol hamburger (hanya tampil di mobile) */
         .hamburger {
             display: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: #a5512c;
-            transition: 0.2s;
+            color: var(--blue-700);
             background: none;
             border: none;
         }
 
-        .hamburger:hover {
-            color: #cc7b4b;
-        }
-
-        /* Mobile styles */
         @media (max-width: 780px) {
-            .hamburger {
-                display: block;
-            }
+            .hamburger { display: block; }
             .nav-menu {
                 position: fixed;
                 left: -100%;
-                top: 70px;
+                top: 62px;
                 flex-direction: column;
-                background: rgba(255, 245, 235, 0.98);
-                backdrop-filter: blur(12px);
-                width: 70%;
+                background: rgba(240,246,255,0.98);
+                backdrop-filter: blur(16px);
+                width: 72%;
+                max-width: 300px;
                 height: 100vh;
-                text-align: center;
+                padding: 2rem 1.5rem;
+                gap: 0.5rem;
                 transition: 0.3s ease;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                padding: 2rem 0;
-                gap: 1.8rem;
+                box-shadow: 4px 0 32px rgba(4,44,83,0.12);
+                border-right: 1px solid rgba(55,138,221,0.15);
                 z-index: 999;
-                border-radius: 0 20px 20px 0;
             }
-            .nav-menu.active {
-                left: 0;
-            }
-            .nav-link {
-                font-size: 1.1rem;
-                padding: 0.5rem;
-                display: block;
-            }
-            .nav-container {
-                padding: 0.8rem 1.5rem;
-            }
+            .nav-menu.active { left: 0; }
+            .nav-link { font-size: 1rem; padding: 0.7rem 1rem; display: block; }
         }
 
-        /* ANIMASI HALAMAN SAJA (slide, fade, pop) */
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        /* ── KEYFRAMES ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
         @keyframes pop {
-            0% { transform: scale(0.95); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { opacity: 0; transform: scale(0.93); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
 
-        /* ANIMASI EMOJI BERPUTAR MENGELILINGI FOTO */
-        @keyframes orbitEmoji {
-            from {
-                transform: rotate(0deg) translateX(110px) rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg) translateX(110px) rotate(-360deg);
-            }
+        /* ORBIT EMOJI */
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+        }
+        @keyframes orbitSmall {
+            from { transform: rotate(0deg) translateX(98px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(98px) rotate(-360deg); }
         }
 
-        @keyframes orbitEmojiSmall {
-            from {
-                transform: rotate(0deg) translateX(90px) rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg) translateX(90px) rotate(-360deg);
-            }
+        /* ANIMATED SQUARE BORDER PHOTO */
+        @keyframes rotateBorder {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @keyframes rotateBorderReverse {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(-360deg); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 16px rgba(55,138,221,0.2), 0 0 0 0 rgba(55,138,221,0.0); }
+            50% { box-shadow: 0 0 40px rgba(55,138,221,0.35), 0 0 0 6px rgba(55,138,221,0.07); }
+        }
+        @keyframes cornerDash {
+            0% { stroke-dashoffset: 800; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes squareSpin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(90deg); }
+        }
+        /* Corner pieces move animation */
+        @keyframes cornerPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
-        /* Kelas animasi untuk kemunculan elemen */
-        .animate-left {
-            animation: slideInLeft 0.6s ease forwards;
-        }
-        .animate-right {
-            animation: slideInRight 0.6s ease forwards;
-        }
-        .animate-pop {
-            animation: pop 0.5s ease forwards;
-        }
-
+        /* ── CONTAINER ── */
         .container {
-            max-width: 1200px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 1.5rem 2rem;
+            padding: 2rem 1.5rem 3rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Header / Hero Section */
+        /* ── HERO ── */
         .hero {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2.5rem;
             align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            background: rgba(255, 245, 235, 0.8);
-            backdrop-filter: blur(4px);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
             border-radius: 2rem;
-            padding: 2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .hero-text .greeting {
-            font-size: 1.1rem;
-            background: #f7c5a3;
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-        }
-
-        .hero-text h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #cc7b4b, #a5512c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin: 0.5rem 0;
-        }
-
-        .hero-text .nim-info {
-            font-size: 1rem;
-            background: #fff0e0;
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 20px;
-            margin-top: 0.5rem;
-        }
-
-        .hero-avatar {
-            flex: 0.5;
-            text-align: center;
+            padding: 2.5rem 3rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(55,138,221,0.2);
+            box-shadow: 0 20px 60px rgba(4,44,83,0.08), 0 1px 0 rgba(255,255,255,0.8) inset;
+            animation: pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
             position: relative;
-        }
-
-        /* Container foto dengan emoji berputar */
-        .avatar-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Tempat foto (foto nantinya bisa diganti) */
-        .avatar-bubble {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            background: #ffd6b0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            z-index: 2;
-            transition: transform 0.2s;
-            border: 3px solid #fff6eb;
             overflow: hidden;
         }
 
-        .avatar-bubble i {
-            font-size: 5rem;
-            color: #ad5a2e;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(55,138,221,0.12), transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: -40px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(29,158,117,0.1), transparent 70%);
+            pointer-events: none;
         }
 
-        /* Untuk foto asli nanti (jika ada gambar) */
+        .greeting-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.3);
+            color: var(--blue-600);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.05;
+            color: var(--blue-900);
+            margin-bottom: 0.7rem;
+            letter-spacing: -1.5px;
+        }
+        .hero h1 .accent { color: var(--blue-500); }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+        }
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.25);
+            color: var(--blue-800);
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+        }
+        .meta-pill i { color: var(--blue-500); font-size: 0.75rem; }
+        .meta-pill.teal { background: var(--teal-50); border-color: rgba(29,158,117,0.25); color: #085041; }
+        .meta-pill.teal i { color: var(--teal-400); }
+
+        /* ── ANIMATED PHOTO CONTAINER ── */
+        .hero-avatar { text-align: center; position: relative; }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 230px;
+            height: 230px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── KOTAK LUAR: spinning conic gradient border ── */
+        .ring-outer {
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .ring-outer::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(
+                from 0deg,
+                #378ADD 0deg, #1D9E75 90deg, #7F77DD 180deg, #378ADD 270deg, #1D9E75 360deg
+            );
+            animation: rotateBorder 3s linear infinite;
+        }
+        .ring-outer::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 24px;
+            background: var(--bg);
+        }
+
+        /* ── KOTAK TENGAH: dashed border berputar balik ── */
+        .ring-mid {
+            position: absolute;
+            inset: -12px;
+            border-radius: 36px;
+            border: 2px dashed rgba(55,138,221,0.4);
+            animation: rotateBorderReverse 7s linear infinite;
+            z-index: 0;
+        }
+
+        /* ── CORNER ACCENTS: sudut-sudut kotak animasi ── */
+        .corner {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            z-index: 4;
+            animation: cornerPulse 2s ease-in-out infinite;
+        }
+        .corner::before, .corner::after {
+            content: '';
+            position: absolute;
+            background: var(--blue-400);
+            border-radius: 2px;
+        }
+        .corner::before { width: 100%; height: 3px; top: 0; left: 0; }
+        .corner::after  { width: 3px; height: 100%; top: 0; left: 0; }
+
+        .corner-tl { top: -2px; left: -2px; }
+        .corner-tr { top: -2px; right: -2px; transform: scaleX(-1); }
+        .corner-bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+        .corner-br { bottom: -2px; right: -2px; transform: scale(-1); }
+
+        .corner-tl { animation-delay: 0s; }
+        .corner-tr { animation-delay: 0.5s; }
+        .corner-bl { animation-delay: 1s; }
+        .corner-br { animation-delay: 1.5s; }
+
+        /* ── FOTO: kotak rounded ── */
+        .avatar-bubble {
+            position: relative;
+            width: 178px;
+            height: 178px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--blue-100), var(--blue-50));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            overflow: hidden;
+            animation: pulseGlow 3s ease-in-out infinite, float 4s ease-in-out infinite;
+        }
+        .avatar-bubble i {
+            font-size: 4.5rem;
+            color: var(--blue-600);
+        }
         .avatar-bubble img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 20px;
         }
 
-        .avatar-bubble:hover {
-            transform: scale(1.02);
-        }
-
-        /* Gaya untuk emoji berputar */
+        /* Orbit emojis */
         .orbit-emoji {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            font-size: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255,255,240,0.7);
+            top: 50%; left: 50%;
+            width: 38px; height: 38px;
+            margin: -19px 0 0 -19px;
+            font-size: 26px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid rgba(55,138,221,0.2);
             border-radius: 50%;
-            backdrop-filter: blur(2px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            pointer-events: none; /* agar tidak menghalangi klik */
+            box-shadow: 0 2px 12px rgba(4,44,83,0.1);
+            pointer-events: none;
             z-index: 3;
         }
+        .oe1 { animation: orbit 7s linear infinite; }
+        .oe2 { animation: orbitSmall 10s linear infinite reverse; }
+        .oe3 { animation: orbit 11s linear infinite; animation-delay: -3s; }
+        .oe4 { animation: orbitSmall 8s linear infinite reverse; animation-delay: -2s; }
+        .oe5 { animation: orbit 13s linear infinite; animation-delay: -5s; }
+        .oe6 { animation: orbitSmall 9s linear infinite reverse; animation-delay: -1s; }
 
-        /* Animasi orbit dengan delay berbeda */
-        .emoji-orbit-1 {
-            animation: orbitEmoji 8s linear infinite;
-        }
-        .emoji-orbit-2 {
-            animation: orbitEmojiSmall 10s linear infinite reverse;
-        }
-        .emoji-orbit-3 {
-            animation: orbitEmoji 12s linear infinite;
-        }
-        .emoji-orbit-4 {
-            animation: orbitEmojiSmall 7s linear infinite reverse;
-        }
-        .emoji-orbit-5 {
-            animation: orbitEmoji 9s linear infinite;
-        }
-        .emoji-orbit-6 {
-            animation: orbitEmojiSmall 11s linear infinite reverse;
+        .avatar-label {
+            margin-top: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--blue-500);
         }
 
-        /* kartu umum */
+        /* ── CARDS ── */
         .card {
-            background: #ffffffdd;
-            backdrop-filter: blur(8px);
-            border-radius: 2rem;
-            padding: 1.6rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #ffecdb;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 1.6rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(55,138,221,0.15);
+            box-shadow: 0 8px 32px rgba(4,44,83,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 48px rgba(4,44,83,0.1);
         }
 
+        /* ── SECTION TITLE ── */
         .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
             gap: 12px;
-            border-left: 7px solid #f2a07e;
-            padding-left: 1rem;
+            margin-bottom: 1.4rem;
+        }
+        .section-title-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.25);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--blue-500);
+            font-size: 1.1rem;
+        }
+        .section-title h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--blue-900);
+            letter-spacing: -0.5px;
         }
 
-        .section-title i {
-            font-size: 2rem;
-            color: #e68a4d;
-        }
+        /* STRIP accent */
+        .card-accent { border-left: 4px solid var(--blue-400); padding-left: 1.5rem; }
 
-        /* skills grid */
+        /* ── SKILLS ── */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.7rem;
             margin-top: 1rem;
         }
-
         .skill-badge {
-            background: #ffede0;
-            padding: 0.7rem 1.3rem;
-            border-radius: 60px;
-            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1rem;
+            gap: 7px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.25);
+            color: var(--blue-800);
+            font-weight: 600;
+            font-size: 0.82rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
             transition: all 0.2s;
-            border: 1px solid #ffc2a1;
         }
-
-        .skill-badge i {
-            font-size: 1.3rem;
-            color: #cd6e3e;
-        }
-
         .skill-badge:hover {
-            background: #ffd8be;
-            transform: scale(1.02);
+            background: var(--blue-100);
+            border-color: var(--blue-300);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(55,138,221,0.15);
+        }
+        .skill-badge i { color: var(--blue-500); font-size: 0.9rem; }
+        .skill-badge.teal { background: var(--teal-50); border-color: rgba(29,158,117,0.25); color: #085041; }
+        .skill-badge.teal i { color: var(--teal-400); }
+        .skill-badge.purple { background: var(--purple-50); border-color: rgba(127,119,221,0.25); color: #26215C; }
+        .skill-badge.purple i { color: var(--purple-400); }
+
+        .fun-note {
+            margin-top: 1rem;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.2);
+            border-radius: 50px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.82rem;
+            color: var(--blue-700);
+            font-weight: 500;
         }
 
-        /* project cards */
+        /* ── PROJECTS ── */
+        .projects-section { margin-bottom: 1.5rem; }
+        .projects-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
         }
 
         .project-card {
-            background: #fffaf5;
-            border-radius: 1.5rem;
-            padding: 1.4rem;
+            background: var(--card-bg);
+            border-radius: 1.4rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(55,138,221,0.15);
+            box-shadow: 0 4px 16px rgba(4,44,83,0.05);
             transition: all 0.25s;
-            border: 1px solid #ffe1cc;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
         }
-
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue-400), var(--teal-400));
+        }
         .project-card:hover {
-            background: #fff8f0;
             transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(4,44,83,0.1);
+            border-color: rgba(55,138,221,0.3);
         }
+        .project-card:nth-child(2)::before { background: linear-gradient(90deg, var(--purple-400), var(--blue-400)); }
+        .project-card:nth-child(3)::before { background: linear-gradient(90deg, var(--teal-400), var(--purple-400)); }
+        .project-card:nth-child(4)::before { background: linear-gradient(90deg, var(--coral-400), var(--blue-400)); }
 
-        .project-icon {
-            font-size: 2.4rem;
-            background: #fae3d1;
-            width: 55px;
-            height: 55px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .project-icon-wrap {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.2);
+            display: flex; align-items: center; justify-content: center;
             margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--blue-500);
         }
+        .project-card:nth-child(2) .project-icon-wrap { background: var(--purple-50); border-color: rgba(127,119,221,0.2); color: var(--purple-400); }
+        .project-card:nth-child(3) .project-icon-wrap { background: var(--teal-50); border-color: rgba(29,158,117,0.2); color: var(--teal-400); }
+        .project-card:nth-child(4) .project-icon-wrap { background: var(--coral-50); border-color: rgba(216,90,48,0.2); color: var(--coral-400); }
 
         .project-title {
             font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 0.6rem;
+            font-size: 0.97rem;
+            color: var(--blue-900);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
         }
-
         .project-desc {
-            font-size: 0.9rem;
-            color: #5e4332;
-            line-height: 1.4;
+            font-size: 0.82rem;
+            color: #185FA5;
+            line-height: 1.55;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            font-size: 0.9rem;
-            border-top: 2px dashed #f3c7ac;
+        /* ── EDUCATION ── */
+        .edu-block {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .edu-icon {
+            width: 48px; height: 48px; flex-shrink: 0;
+            border-radius: 14px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.25);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--blue-500);
+            font-size: 1.2rem;
+        }
+        .edu-text strong {
+            font-weight: 700;
+            color: var(--blue-900);
+            font-size: 0.95rem;
+            display: block;
+        }
+        .edu-text span {
+            font-size: 0.82rem;
+            color: var(--blue-600);
+            margin-top: 2px;
+            display: block;
+        }
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.2rem;
         }
 
-        @media (max-width: 780px) {
-            .container {
-                padding: 1rem;
-            }
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero-text h1 {
-                font-size: 2.2rem;
-            }
-            .section-title {
-                font-size: 1.5rem;
-            }
-            .avatar-container {
-                width: 160px;
-                height: 160px;
-            }
-            .avatar-bubble {
-                width: 120px;
-                height: 120px;
-            }
-            .avatar-bubble i {
-                font-size: 3.5rem;
-            }
-            .orbit-emoji {
-                width: 30px;
-                height: 30px;
-                font-size: 24px;
-            }
-            @keyframes orbitEmoji {
-                from { transform: rotate(0deg) translateX(85px) rotate(0deg); }
-                to { transform: rotate(360deg) translateX(85px) rotate(-360deg); }
-            }
-            @keyframes orbitEmojiSmall {
-                from { transform: rotate(0deg) translateX(70px) rotate(0deg); }
-                to { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
-            }
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* microsoft office special */
-        .ms-badge {
-            background: #e5f3ff;
-            border-left: 4px solid #2b5797;
-        }
-
-        .education-detail {
+        /* ── CONTACT ── */
+        .contact-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-            background: #fff5ed;
-            border-radius: 1.2rem;
-            padding: 1rem 1.5rem;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue-50);
+            border: 1px solid rgba(55,138,221,0.25);
+            color: var(--blue-700);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .contact-link:hover {
+            background: var(--blue-100);
+            border-color: var(--blue-400);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(55,138,221,0.15);
+        }
+        .contact-link i { color: var(--blue-500); }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--blue-500);
+            letter-spacing: 0.05em;
+            border-top: 1px dashed rgba(55,138,221,0.2);
+            margin-top: 0.5rem;
         }
 
-        /* catatan jika foto ingin diganti */
-        .photo-note {
-            font-size: 0.7rem;
-            margin-top: 8px;
-            color: #a57358;
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 780px) {
+            .container { padding: 1rem 1rem 2.5rem; }
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem 1.5rem;
+                gap: 2rem;
+            }
+            .hero::before, .hero::after { display: none; }
+            .hero-meta { justify-content: center; }
+            .hero h1 { font-size: 2.4rem; }
+            .hero-avatar { order: -1; }
+            .avatar-wrapper { width: 190px; height: 190px; }
+            .avatar-bubble { width: 144px; height: 144px; border-radius: 16px; }
+            .avatar-bubble i { font-size: 3.5rem; }
+            .orbit-emoji { width: 32px; height: 32px; margin: -16px 0 0 -16px; font-size: 20px; }
+
+            @keyframes orbit {
+                from { transform: rotate(0deg) translateX(95px) rotate(0deg); }
+                to   { transform: rotate(360deg) translateX(95px) rotate(-360deg); }
+            }
+            @keyframes orbitSmall {
+                from { transform: rotate(0deg) translateX(78px) rotate(0deg); }
+                to   { transform: rotate(360deg) translateX(78px) rotate(-360deg); }
+            }
+
+            .projects-grid { grid-template-columns: 1fr; }
+            .edu-grid { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 1.25rem; }
+            .card { padding: 1.4rem; }
         }
+
+        a { text-decoration: none; }
     </style>
 </head>
 <body>
 
-<!-- ========== NAVBAR BARU (TIDAK MENGUBAH KONTEN LAIN) ========== -->
+<!-- NAVBAR -->
 <nav class="navbar">
     <div class="nav-container">
-        <div class="logo">
-            <i class="fas fa-grin-tongue-squint"></i> Imelda.
-        </div>
+        <div class="logo">Imelda<span>.</span></div>
         <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
             <i class="fas fa-bars"></i>
         </button>
         <ul class="nav-menu" id="navMenu">
-            <li><a href="#tentang" class="nav-link">🌸 Tentang</a></li>
-            <li><a href="#skill" class="nav-link">💡 Skill</a></li>
-            <li><a href="#project" class="nav-link">📁 Project</a></li>
-            <li><a href="#pendidikan" class="nav-link">🎓 Pendidikan</a></li>
-            <li><a href="#kontak" class="nav-link">📫 Kontak</a></li>
+            <li><a href="#tentang" class="nav-link">✦ Tentang</a></li>
+            <li><a href="#skill" class="nav-link">✦ Skill</a></li>
+            <li><a href="#project" class="nav-link">✦ Project</a></li>
+            <li><a href="#pendidikan" class="nav-link">✦ Pendidikan</a></li>
+            <li><a href="#kontak" class="nav-link">✦ Kontak</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
-    <!-- Hero section dengan animasi halaman pop -->
-    <div class="hero animate-pop">
+
+    <!-- HERO -->
+    <div class="hero">
         <div class="hero-text">
-            <span class="greeting"><i class="fas fa-smile-wink"></i> Hello Social World!</span>
-            <h1>Imelda <span style="font-family: 'Pacifico', cursive; font-weight: normal;">✨</span></h1>
-            <p><i class="fas fa-graduation-cap"></i> Sistem Informasi · La Tansa Mashiro</p>
-            <p><i class="fas fa-id-card"></i> NIM: 515241009 · Angkatan 2024</p>
-            <div style="margin-top: 1rem;">
-                <span class="skill-badge" style="background:#ffe1cf;"><i class="fas fa-laptop-code"></i> Pemula antusias!</span>
-                <span class="skill-badge" style="background:#ffe1cf;"><i class="fas fa-heart"></i> Belajar sambil senyum</span>
+            <div class="greeting-tag"><i class="fas fa-sparkles"></i> Hello Social World!</div>
+            <h1>Imelda <span class="accent">✦</span></h1>
+            <p style="font-size:1rem; color: var(--blue-600); font-weight:500; margin-top:0.2rem;">
+                Sistem Informasi · La Tansa Mashiro
+            </p>
+            <div class="hero-meta">
+                <span class="meta-pill"><i class="fas fa-id-card"></i> NIM 515241009</span>
+                <span class="meta-pill"><i class="fas fa-calendar"></i> Angkatan 2024</span>
+                <span class="meta-pill teal"><i class="fas fa-map-marker-alt"></i> Rangkasbitung</span>
+                <span class="meta-pill teal"><i class="fas fa-heart"></i> Belajar sambil senyum</span>
             </div>
         </div>
-        <div class="hero-avatar">
-            <!-- Container foto dengan emoji berputar di sekelilingnya -->
-            <div class="avatar-container">
-                <!-- Emoji-emoji lucu yang berputar mengelilingi foto -->
-                <div class="orbit-emoji emoji-orbit-1" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">😊</div>
-                <div class="orbit-emoji emoji-orbit-2" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">🐣</div>
-                <div class="orbit-emoji emoji-orbit-3" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">✨</div>
-                <div class="orbit-emoji emoji-orbit-4" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">🌸</div>
-                <div class="orbit-emoji emoji-orbit-5" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">⭐</div>
-                <div class="orbit-emoji emoji-orbit-6" style="top: 50%; left: 50%; margin: -20px 0 0 -20px;">💖</div>
-                
-                <!-- Foto profil (bisa diganti nanti dengan gambar asli) -->
-                <div class="avatar-bubble" id="profilePhoto">
-                    
-                    <i class="fas fa-grin-tongue-squint"></i>
 
-                    <!-- <img src="foto-imelda.jpg" alt="imelda"> -->
+        <div class="hero-avatar">
+            <div class="avatar-wrapper">
+                <!-- Square animated borders -->
+                <div class="ring-mid"></div>
+                <div class="ring-outer"></div>
+
+                <!-- Corner accents -->
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
+
+                <!-- Orbiting emojis -->
+                <div class="orbit-emoji oe1">😊</div>
+                <div class="orbit-emoji oe2">🐣</div>
+                <div class="orbit-emoji oe3">✨</div>
+                <div class="orbit-emoji oe4">🌸</div>
+                <div class="orbit-emoji oe5">⭐</div>
+                <div class="orbit-emoji oe6">💙</div>
+
+                <!-- Photo bubble -->
+                <div class="avatar-bubble">
+                    <i class="fas fa-grin-tongue-squint"></i>
+                    <!-- Uncomment untuk foto asli: <img src="foto-imelda.jpg" alt="Imelda"> -->
                 </div>
             </div>
-            <p class="photo-note"><i class="fas fa-camera"></i> IMELDA!</p>
-            <p style="margin-top: 5px; font-size:1rem;"><i class="fas fa-cat"></i> Semangat & produktif</p>
+            <p class="avatar-label">✦ IMELDA ✦</p>
+            <p style="font-size:0.8rem; color:var(--blue-500); margin-top:4px; font-weight:500;">Semangat & produktif 🐱</p>
         </div>
     </div>
 
-    <!-- Tentang Imelda -->
-    <div id="tentang" class="card animate-left" style="animation-delay: 0.1s;">
+    <!-- TENTANG -->
+    <div id="tentang" class="card card-accent reveal">
         <div class="section-title">
-            <i class="fas fa-face-smile"></i>
-            <span>🍥 Tentang Imelda</span>
+            <div class="section-title-icon"><i class="fas fa-face-smile"></i></div>
+            <h2>Tentang Imelda</h2>
         </div>
-        <p>Halo! Aku mahasiswi Sistem Informasi di <strong>La Tansa Mashiro</strong>, angkatan 2024. Masih dalam proses belajar, tapi aku sangat suka memadukan logika, data, dan desain fun. Senang membuat sesuatu yang berguna sekaligus bikin orang tersenyum. <i class="fas fa-cookie-bite"></i> Saat ini fokus mendalami dasar-dasar pemrograman, analisis sistem, dan tentu saja menguasai Microsoft Office untuk kelancaran akademik.</p>
-        <div style="margin-top: 12px;">
-            <i class="fas fa-map-marker-alt"></i> Rangkasbitung, Banten ·  <i class="fas fa-calendar-alt"></i> 2024 - now
+        <p style="line-height:1.75; color: var(--blue-700); font-size:0.95rem;">
+            Halo! Aku mahasiswi <strong style="color:var(--blue-900);">Sistem Informasi</strong> di <strong style="color:var(--blue-900);">La Tansa Mashiro</strong>, angkatan 2024.
+            Masih dalam proses belajar, tapi aku sangat suka memadukan logika, data, dan desain yang menyenangkan.
+            Senang membuat sesuatu yang berguna sekaligus bikin orang tersenyum 😊
+            Saat ini fokus mendalami dasar-dasar pemrograman, analisis sistem, dan tentu saja menguasai Microsoft Office untuk kelancaran akademik.
+        </p>
+        <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:0.6rem;">
+            <span class="skill-badge"><i class="fas fa-laptop-code"></i> Pemula antusias!</span>
+            <span class="skill-badge teal"><i class="fas fa-seedling"></i> Junior explorer</span>
+            <span class="skill-badge purple"><i class="fas fa-star"></i> 2024 - sekarang</span>
         </div>
     </div>
 
-    <!-- Skill yang sedang diasah -->
-    <div id="skill" class="card animate-right" style="animation-delay: 0.2s;">
+    <!-- SKILL -->
+    <div id="skill" class="card reveal">
         <div class="section-title">
-            <i class="fas fa-puzzle-piece"></i>
-            <span>🤹‍♀️ Skill yang sedang diasah</span>
+            <div class="section-title-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <h2>Skill yang sedang diasah</h2>
         </div>
-        <p class="skill-note" style="margin-bottom: 0.8rem;"><i class="fas fa-seedling"></i> Masih tahap belajar (Junior explorer), tapi siap belajar cepat!</p>
         <div class="skills-grid">
-            <div class="skill-badge"><i class="fas fa-chart-line"></i> Analisis Kebutuhan Sistem (dasar)</div>
-            <div class="skill-badge"><i class="fas fa-database"></i> SQL / Basis Data (pemula)</div>
-
-            <div class="skill-badge"><i class="fas fa-code"></i> HTML & CSS (responsif)</div>
-            <div class="skill-badge ms-badge"><i class="fab fa-microsoft"></i> Microsoft Word 🖊️</div>
-            <div class="skill-badge ms-badge"><i class="fas fa-table"></i> Microsoft Excel (rumus dasar, pivot sederhana)</div>
-            <div class="skill-badge ms-badge"><i class="fas fa-chalkboard-user"></i> Microsoft PowerPoint (presentasi menarik)</div>
-            <div class="skill-badge"><i class="fas fa-folder-open"></i> Dokumentasi & Rapi</div>
+            <div class="skill-badge"><i class="fas fa-chart-line"></i> Analisis Kebutuhan Sistem</div>
+            <div class="skill-badge"><i class="fas fa-database"></i> SQL / Basis Data</div>
+            <div class="skill-badge"><i class="fas fa-code"></i> HTML & CSS</div>
+            <div class="skill-badge teal"><i class="fab fa-microsoft"></i> Microsoft Word</div>
+            <div class="skill-badge teal"><i class="fas fa-table"></i> Microsoft Excel</div>
+            <div class="skill-badge teal"><i class="fas fa-chalkboard-user"></i> Microsoft PowerPoint</div>
+            <div class="skill-badge purple"><i class="fas fa-folder-open"></i> Dokumentasi & Rapi</div>
+            <div class="skill-badge purple"><i class="fab fa-js"></i> JavaScript (belajar)</div>
         </div>
-        <div style="margin-top: 1rem; background: #ffefe3; border-radius: 50px; padding: 0.5rem 1rem;">
-            <i class="fas fa-lightbulb"></i> <strong>Catatan lucu:</strong> Excel masih suka tertukar antara masing masing rumus! 😂
+        <div class="fun-note">
+            <i class="fas fa-lightbulb"></i> <strong>Catatan lucu:</strong> Excel masih suka tertukar antara masing-masing rumus! 😂
         </div>
     </div>
 
-    <!-- Project Mini -->
-    <div id="project">
-        <div class="section-title" style="margin-bottom: 1rem;">
-            <i class="fas fa-laptop-file"></i>
-            <span>📁 Mini Project</span>
+    <!-- PROJECT -->
+    <div id="project" class="projects-section reveal">
+        <div class="projects-header">
+            <div class="section-title-icon" style="background:var(--blue-50); border:1px solid rgba(55,138,221,0.25); border-radius:12px; width:42px; height:42px; display:flex; align-items:center; justify-content:center; color:var(--blue-500);">
+                <i class="fas fa-laptop-file"></i>
+            </div>
+            <h2 style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; color:var(--blue-900); letter-spacing:-0.5px;">Mini Project</h2>
         </div>
         <div class="projects-grid">
-            <div class="project-card animate-left" style="animation-delay: 0.1s;">
-                <div class="project-icon"><i class="fas fa-clipboard-list"></i></div>
+            <div class="project-card">
+                <div class="project-icon-wrap"><i class="fas fa-clipboard-list"></i></div>
                 <div class="project-title">📊 Sistem Kasir Sederhana (Excel)</div>
-                <div class="project-desc">Membuat form transaksi sederhana menggunakan Microsoft Excel dengan fungsi SUM, IF, dan format bersyarat. Bisa menghitung total belanja & kembalian. Cocok untuk mini market UMKM. <i class="fas fa-smile"></i> <strong>Tools:</strong> Excel, rumus dasar.</div>
+                <div class="project-desc">Form transaksi menggunakan Microsoft Excel dengan fungsi SUM, IF, dan format bersyarat. Menghitung total belanja & kembalian untuk UMKM.</div>
             </div>
-            <div class="project-card animate-right" style="animation-delay: 0.2s;">
-                <div class="project-icon"><i class="fas fa-id-card"></i></div>
+            <div class="project-card">
+                <div class="project-icon-wrap"><i class="fas fa-id-card"></i></div>
                 <div class="project-title">📇 Portofolio Digital (HTML/CSS)</div>
-                <div class="project-desc">Page Portofolio yang aku buat di github dan hanya menggunakan html dan css saja lohh! <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></div>
+                <div class="project-desc">Halaman portofolio yang dibuat di GitHub menggunakan HTML dan CSS. Desain responsif dan menarik sepenuhnya dari nol!</div>
             </div>
-            <div class="project-card animate-left" style="animation-delay: 0.3s;">
-                <div class="project-icon"><i class="fas fa-chart-pie"></i></div>
-                <div class="project-title">Survey Kesiapan Universitas Dalam Transformasi Digital</div>
-                <div class="project-desc">Mengolah data survei 1 Fakultas, 2 Program studi mulai dari Mahasiswa hingga kaprodi tentang siap atau tidaknya fakultas tersebut bertransormasi digital. <i class="fas fa-chart-simple"></i> Tools Yang Aku Gunakan Yaitu GoogleForm!</div>
+            <div class="project-card">
+                <div class="project-icon-wrap"><i class="fas fa-chart-pie"></i></div>
+                <div class="project-title">📋 Survey Transformasi Digital</div>
+                <div class="project-desc">Mengolah data survei 1 Fakultas, 2 Program Studi — dari Mahasiswa hingga Kaprodi tentang kesiapan transformasi digital.</div>
             </div>
-            <div class="project-card animate-right" style="animation-delay: 0.4s;">
-                <div class="project-icon"><i class="fas fa-tasks"></i></div>
-                <div class="project-title">✅ To-Do List</div>
-                <div class="project-desc">Aplikasi daftar tugas sederhana dengan HTML/CSS/JS (localStorage). Bisa tambah, centang selesai, dan hapus. cocok buat aku yang lagi belajar. <i class="fas fa-cat"></i></div>
+            <div class="project-card">
+                <div class="project-icon-wrap"><i class="fas fa-tasks"></i></div>
+                <div class="project-title">✅ To-Do List App</div>
+                <div class="project-desc">Aplikasi daftar tugas dengan HTML/CSS/JS (localStorage). Bisa tambah, centang selesai, dan hapus. Cocok buat yang lagi belajar!</div>
             </div>
         </div>
-            </div>
-
-    <!-- Pendidikan & riwayat -->
-    <div id="pendidikan" class="card animate-pop" style="margin-top: 1rem; background: #fffaf1;">
-        <div class="section-title">
-            <i class="fas fa-school"></i>
-            <span>🎓 Pendidikan & cerita manis</span>
-        </div>
-        <div class="education-detail">
-            <div><i class="fas fa-university"></i> <strong>La Tansa Mashiro</strong> — S1 Sistem Informasi (2024-sekarang) <br> <small>Semester 4, lagi asyik-asyiknya belajar Pemrograman & basis data.</small></div>
-            <div><i class="fas fa-laptop"></i> <strong>Course Online:</strong> Pengenalan Pemrograman melalui kursus HUAWEI.</div>
-        </div>
-        
     </div>
 
-    <!-- Kontak -->
-    <div id="kontak" class="card" style="text-align: center; background: #fff8ef;">
-        <div class="section-title justify-content-center" style="justify-content: center; border-left: none;">
-            <i class="fas fa-envelope-open-text"></i>
-            <span>📫 Kirim pesan ke Imelda yukk!!</span>
+    <!-- PENDIDIKAN -->
+    <div id="pendidikan" class="card reveal" style="margin-top:0.5rem; background:linear-gradient(135deg, rgba(230,241,251,0.6), rgba(255,255,255,0.85));">
+        <div class="section-title">
+            <div class="section-title-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h2>Pendidikan & Cerita</h2>
         </div>
-        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;">
-            <a href="#" style="color: #a5532a;"><i class="fab fa-instagram "></i> nono yaa</a>
-            <a href="#" style="color: #a5532a;"><i class="fab fa-linkedin"></i> imelda</a>
-            <a href="#" style="color: #a5532a;"><i class="fab fa-github"></i> imeldaaja</a>
-            <span><i class="fas fa-heart"></i> imelddoang@gmail.com</span>
+        <div class="edu-grid">
+            <div class="edu-block">
+                <div class="edu-icon"><i class="fas fa-university"></i></div>
+                <div class="edu-text">
+                    <strong>La Tansa Mashiro</strong>
+                    <span>S1 Sistem Informasi · 2024–sekarang</span>
+                    <span style="color:var(--blue-400); font-size:0.78rem; margin-top:4px;">Semester 4 — belajar Pemrograman & Basis Data</span>
+                </div>
+            </div>
+            <div class="edu-block">
+                <div class="edu-icon" style="background:var(--teal-50); border-color:rgba(29,158,117,0.25); color:var(--teal-400);"><i class="fas fa-laptop"></i></div>
+                <div class="edu-text">
+                    <strong style="color:var(--blue-900);">Course Online</strong>
+                    <span>Pengenalan Pemrograman</span>
+                    <span style="color:var(--teal-400); font-size:0.78rem; margin-top:4px;">via HUAWEI Academy</span>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- KONTAK -->
+    <div id="kontak" class="card reveal" style="text-align:center; background:linear-gradient(135deg, rgba(230,241,251,0.7), rgba(255,255,255,0.9));">
+        <div class="section-title" style="justify-content:center; border-left:none; padding-left:0;">
+            <div class="section-title-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <h2>Kirim Pesan ke Imelda!</h2>
         </div>
+        <p style="font-size:0.87rem; color:var(--blue-600); margin-bottom:0.5rem;">Yuk connect bareng — aku selalu senang berkenalan! 👋</p>
+        <div class="contact-links">
+            <a href="#" class="contact-link"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="#" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="#" class="contact-link"><i class="fab fa-github"></i> imeldaaja</a>
+            <a href="mailto:imelddoang@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> imelddoang@gmail.com</a>
+        </div>
+    </div>
 
     <footer>
-        <p>🐣 Portofolio Imelda <i class="fas fa-feather-alt"></i> | 2026 • La Tansa Mashiro</p>
-          </footer>
+        ✦ Portofolio Imelda · 2026 · La Tansa Mashiro ✦
+    </footer>
+
 </div>
 
 <script>
-    // ========== NAVBAR RESPONSIF: Toggle hamburger menu ==========
+    // Hamburger toggle
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
-
     if (hamburgerBtn && navMenu) {
         hamburgerBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            // Ubah icon hamburger menjadi X saat aktif
             const icon = hamburgerBtn.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+            icon.className = navMenu.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
         });
-
-        // Tutup menu mobile ketika klik link navbar
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
-                const icon = hamburgerBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                hamburgerBtn.querySelector('i').className = 'fas fa-bars';
             });
         });
     }
 
-    // Scroll reveal animation: hanya mengatur opacity dan transform saat elemen muncul
-    const revealElements = document.querySelectorAll('.card, .project-card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    // efek fade-in saat scroll
-    revealElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-
-    // Smooth scroll untuk anchor link (opsional, biar lebih halus)
+    // Smooth scroll
     document.querySelectorAll('.nav-link').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
-            if (targetId && targetId !== '#') {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
+            if (targetId && targetId.startsWith('#')) {
+                const el = document.querySelector(targetId);
+                if (el) {
                     e.preventDefault();
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }
         });
     });
 
-    console.log("Portofolio Imelda siap — emoji-emoji lucu berputar mengelilingi foto! Navbar responsif telah ditambahkan.");
-</script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => revealObserver.observe(el));
 
+    // Project cards staggered reveal
+    const projectCards = document.querySelectorAll('.project-card');
+    const pcObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const cards = entry.target.querySelectorAll('.project-card');
+                cards.forEach((card, i) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`;
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, i * 100 + 50);
+                    pcObserver.unobserve(entry.target);
+                });
+            }
+        });
+    }, { threshold: 0.15 });
+    const projectGrid = document.querySelector('.projects-grid');
+    if (projectGrid) pcObserver.observe(projectGrid.parentElement);
+</script>
 </body>
 </html>
